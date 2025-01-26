@@ -1,16 +1,16 @@
 import { db } from "@vercel/postgres";
-import { ExecException } from "node:child_process";
 
 const client = await db.connect();
 
 async function listInvoices() {
 	const data = await client.sql`
-    SELECT invoices.amount, customers.name
-    FROM invoices
-    JOIN customers ON invoices.customer_id = customers.id
-    WHERE invoices.amount = 666;
-    `;
-	return data.rows;
+    update invoices set amount=666 WHERE amount = 650
+  `;
+  // SELECT invoices.amount, customers.name
+  // FROM invoices
+  // JOIN customers ON invoices.customer_id = customers.id
+  // WHERE invoices.amount = 666;
+	return data;
 }
 
 export async function GET() {
